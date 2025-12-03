@@ -184,7 +184,7 @@ class ChatGUI(tk.Tk, Observer):
             self.typing_var.set(f"{session.name} is typing{dots}")
             time.sleep(0.4)
         self.typing_var.set('')
-        reply = MessageFactory.create('text', 'Bot', 'Auto-reply: Thanks!')
+        reply = MessageFactory.create('text', 'Bot', 'Auto-reply: how can i help you!')
         self.engine.route_message(session_id, reply)
 
     # ----------------- Status & Search -----------------
