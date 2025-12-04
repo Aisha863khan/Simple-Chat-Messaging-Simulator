@@ -1,0 +1,143 @@
+# Simple Chat / Messaging Simulator
+
+## Project Description
+The Simple Chat / Messaging Simulator is a desktop application developed in Python using Tkinter. It simulates a multi-session chat environment and demonstrates key software engineering principles:
+
+- **Observer Pattern**: Ensures real-time updates between the Chat Engine and GUI.
+- **Factory Pattern**: Dynamically creates different message types (text, system, bot).
+- **Decorator Pattern**: Adds timestamps and custom formatting to messages.
+- **Singleton Pattern**: Ensures a single Chat Engine instance manages all sessions.
+
+### Key Features
+- Multi-session chat simulation
+- Typing indicator animation
+- Auto-reply bot messages
+- Search bar for chat sessions and messages
+- Notification badges (like WhatsApp)
+- Online and last-seen status
+- Dark mode GUI for modern interface
+
+---
+
+## How to Run the System
+
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+cd Simple-Chat-Messaging-Simulator
+Install dependencies (if any):
+
+bash
+Copy code
+pip install -r requirements.txt
+Note: Tkinter is included by default in Python.
+
+Run the application:
+
+bash
+Copy code
+python ui/app.py
+Usage
+Create a new chat session using the "New" button.
+
+Select a session to send and receive messages.
+
+Messages from bots simulate auto-replies.
+
+Use the search bar to filter sessions or search messages in a session.
+
+Dependencies
+Python 3.8+
+
+Tkinter (GUI library, included in standard Python)
+
+Standard libraries: datetime, threading, time
+
+Folder Structure
+graphql
+Copy code
+Simple_Chat_Messaging_Simulator/
+├── engine/
+│   ├── __init__.py
+│   ├── builder.py           # ChatSessionBuilder to create chat sessions
+│   ├── chat_engine.py       # ChatEngine singleton managing sessions & observers
+│   ├── session.py           # ChatSession class definition
+├── messages/
+│   ├── __init__.py
+│   ├── base_message.py      # Base Message class
+│   ├── text_message.py      # Text message type
+│   ├── system_message.py    # System messages
+│   ├── decorators.py        # Message decorators (e.g., TimestampDecorator)
+│   ├── factory.py           # Factory to create message types
+├── patterns/
+│   ├── __init__.py
+│   ├── observer.py          # Observer interface
+│   ├── singleton.py         # Singleton base class for ChatEngine
+├── ui/
+│   ├── __init__.py
+│   ├── gui.py               # Main GUI class (Tkinter)
+│   ├── app.py               # Entry point to launch the application
+├── README.md                # Project description and instructions
+└── requirements.txt         # Python dependencies (optional)
+Design Pattern Usage
+Observer Pattern
+Problem Solved: Decouples the Chat Engine and GUI for real-time updates.
+
+Implementation: ChatEngine acts as the subject; ChatGUI subscribes as the observer.
+
+Classes:
+
+scss
+Copy code
+ChatEngine (Subject)
+ └─ subscribe(observer)
+ └─ notify(event, payload)
+
+ChatGUI (Observer)
+ └─ update(event, payload)
+Factory Pattern
+Problem Solved: Dynamically creates message objects without hardcoding.
+
+Implementation: MessageFactory.create(type, sender, text) generates text, system, or bot messages.
+
+Classes:
+
+pgsql
+Copy code
+MessageFactory
+ └─ create(type, sender, text) → returns Message / SystemMessage / BotMessage
+Decorator Pattern
+Problem Solved: Adds timestamps or formatting to messages at runtime.
+
+Implementation: TimestampDecorator wraps a message and renders it with a timestamp.
+
+Classes:
+
+scss
+Copy code
+TimestampDecorator
+ └─ __init__(message)
+ └─ render() → returns formatted string
+Singleton Pattern
+Problem Solved: Ensures only one Chat Engine instance exists.
+
+Implementation: ChatEngine inherits from a singleton base class.
+
+Known Issues
+Auto-reply bot has a fixed response delay.
+
+Search currently works for text messages only.
+
+Notification badges update slower when many sessions exist.
+
+Messages and sessions are not persisted after closing the application.
+Future Enhancements
+
+Implement message persistence (save chats to files or database).
+
+Add multimedia message support (images, emojis).
+
+Customizable bot responses and typing speed.
+
+Improve search functionality with message filtering.
